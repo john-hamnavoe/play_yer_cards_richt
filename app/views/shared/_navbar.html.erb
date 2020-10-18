@@ -1,0 +1,23 @@
+<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container-fluid">
+    <%= link_to current_site, root_path, title: current_site, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+     <% if current_user %>
+      <ul class="navbar-nav">
+        <%= link_to "Page", "#", class: "nav-link" %>
+      </ul>
+    <% end %>
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <%= link_to "Logout", new_user_registration_path, class: "nav-link" %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
