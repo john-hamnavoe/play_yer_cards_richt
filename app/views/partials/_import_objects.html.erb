@@ -1,0 +1,17 @@
+
+<% if flash[:import] %>
+  <hr>
+  <h2>Import Errors</h2>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-danger"><%= message %></div>
+  <% end %>  
+<% end %>
+<hr>
+<h2>Import</h2>
+<%= form_tag path, multipart: true do %>
+  <%= file_field_tag :file, class: "fileupload btn btn-primary waves-effect waves-light mt-1" %>
+  <div class="fileupload btn btn-secondary waves-effect mt-1">
+      <span><i class="mdi mdi-cloud-upload mr-1"></i>Import</span>
+      <input type="submit" class="upload"  name="commit" value="Import" data-disable-with="Import">
+  </div>  
+<% end %>

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :games
+  resources :questions do
+    collection do
+      post :import
+    end
+  end
   root to: 'dashboard#index'
   get 'dashboard/index'
   devise_for :users

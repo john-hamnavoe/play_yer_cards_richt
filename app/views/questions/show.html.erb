@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Questions", questions_path %></li>
+  <li class="breadcrumb-item active mr-auto"><%= @question.id %></li> 
+</ol>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <p class="font-weight-bold">Question</p>
+      <p class="font-weight-normal"><%= @question.question %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Answer</p>
+      <p class="font-weight-normal"><%= @question.answer %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Is public</p>
+      <p class="font-weight-normal"><%= @question.is_public %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">User</p>
+      <p class="font-weight-normal"><%= @question.user %></p>
+    </li>
+  </ul>
+</div>

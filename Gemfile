@@ -58,3 +58,6 @@ gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'boots
 gem 'devise-pwned_password'
 gem 'gravatar_image_tag'
 gem "stimulus_reflex", "~> 3.3"
+
+gem "pagy", "~> 3.8"
+gem "roo",  '~> 2.8.0'

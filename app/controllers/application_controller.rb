@@ -1,6 +1,18 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   before_action :configure_permitted_parameters, if: :devise_controller?
   
+  def flash_import_errors(import_errors)
+    import_errors.each do |ie|
+      flash_import_message(:import, ie[:row], ie[:error])
+    end
+  end
+  
+  def flash_import_message(type, row, text)
+      flash[type] ||= []
+      flash[type] << "row number: #{row} error: #{text}"
+  end
+      
   protected
 
   def configure_permitted_parameters

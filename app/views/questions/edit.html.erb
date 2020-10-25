@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Questions", questions_path %></li>
+  <li class="breadcrumb-item"><%= link_to @question.id, @question %></li>
+  <li class="breadcrumb-item active">Edit</li>
+</ol>
+
+<%= render 'form', question: @question %>

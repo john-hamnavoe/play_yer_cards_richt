@@ -1,0 +1,25 @@
+<% if game.errors.any? %>
+  <% game.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+<%= form_with(model: game, local: true) do |form| -%>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :name, class: "font-weight-bold" %>
+        <%= form.text_field :name, placeholder: "Enter name", class: "form-control" %>
+      </div>
+    </li>
+  </ul>
+  <div class="card-footer">
+    <%= link_to "Cancel", game, class: 'btn btn-outline-secondary float-left' if game.persisted? %>
+    <%= link_to "Cancel", games_path, class: 'btn btn-outline-secondary float-left' if !game.persisted? %>
+    <%= form.submit "Save", class: "btn btn-primary float-right" if game.persisted? %>
+    <%= form.submit "Create", class: "btn btn-primary float-right" if !game.persisted? %>
+  </div>
+</div>
+<% end %>

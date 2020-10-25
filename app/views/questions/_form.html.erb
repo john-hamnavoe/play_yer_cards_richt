@@ -1,0 +1,37 @@
+<% if question.errors.any? %>
+  <% question.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+<%= form_with(model: question, local: true) do |form| -%>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :question, class: "font-weight-bold" %>
+        <%= form.text_field :question, placeholder: "Enter question", class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :answer, class: "font-weight-bold" %>
+        <%= form.text_field :answer, placeholder: "Enter answer", class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :is_public, class: "font-weight-bold" %>
+        <%= form.check_box :is_public, placeholder: "Enter is_public", class: "pull-left" %>
+      </div>
+    </li>
+  </ul>
+  <div class="card-footer">
+    <%= link_to "Cancel", question, class: 'btn btn-outline-secondary float-left' if question.persisted? %>
+    <%= link_to "Cancel", questions_path, class: 'btn btn-outline-secondary float-left' if !question.persisted? %>
+    <%= form.submit "Save", class: "btn btn-primary float-right" if question.persisted? %>
+    <%= form.submit "Create", class: "btn btn-primary float-right" if !question.persisted? %>
+  </div>
+</div>
+<% end %>
