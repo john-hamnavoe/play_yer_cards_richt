@@ -22,4 +22,10 @@ class ExampleReflex < ApplicationReflex
   #
   # Learn more at: https://docs.stimulusreflex.com
 
+  def higher
+    @higher = "higher"
+  end
+
+  def lower
+  end
 end

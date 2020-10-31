@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Game_questions", game_questions_path %></li>
+  <li class="breadcrumb-item active mr-auto"><%= @game_question.id %></li> 
+</ol>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <p class="font-weight-bold">Game</p>
+      <p class="font-weight-normal"><%= @game_question.game %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Question</p>
+      <p class="font-weight-normal"><%= @game_question.question %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Current card</p>
+      <p class="font-weight-normal"><%= @game_question.current_card %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Card deck</p>
+      <p class="font-weight-normal"><%= @game_question.card_deck %></p>
+    </li>
+  </ul>
+</div>

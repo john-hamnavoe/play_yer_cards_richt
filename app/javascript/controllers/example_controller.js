@@ -1,4 +1,6 @@
 import ApplicationController from './application_controller'
+// Import UJS so we can access the Rails.ajax method
+import Rails from "@rails/ujs";
 
 /* This is the custom StimulusReflex controller for the Example Reflex.
  * Learn more at: https://docs.stimulusreflex.com
@@ -62,4 +64,26 @@ export default class extends ApplicationController {
   //   console.error('danceError', error);
   //   element.innerText = "Couldn't dance!"
   // }
+
+  show_card(element) {
+    console.log(element.target.classList)
+    element.target.classList.remove("back")
+    element.target.classList.add(this.data.get("rank"))
+    element.target.classList.add(this.data.get("suit"))
+    this.stimulate()
+  }
+  
+  higher() {
+    Rails.ajax({
+      type: "patch",
+      url: "/dashboard/higher"
+    })
+  }
+  
+  lower() {
+    Rails.ajax({
+      type: "patch",
+      url: "/dashboard/lower"
+    })
+  }  
 }
