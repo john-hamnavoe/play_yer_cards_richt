@@ -1,4 +1,23 @@
-<h1>Dashboard#index <%= @shown_cards %></h1>
+<h1>Play Yer Cards Richt</h1>
+<div class="card shadow p-3 mb-5 rounded">
+  <h5 class="card-header">Join A Game</h5>
+  <div class="card-body">
+    <h5 class="card-title">Got a Pin?</h5>
+    <p class="card-text">If you are wanting to join a game click the button to enter your pin.</p>
+    <%= link_to "Enter Pin", new_game_player_path, class: "btn btn-success"%>
+  </div>
+</div>
+
+
+<hr>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Aces high, same card suit order: clubs (lowest), followed by diamonds, hearts, and spades (highest). </p>
 
 <div class="playingCards fourColours faceImages">

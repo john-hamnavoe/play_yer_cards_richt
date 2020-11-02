@@ -1,0 +1,37 @@
+<% if game_player.errors.any? %>
+  <% game_player.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+<%= form_with(model: game_player, local: true) do |form| -%>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :game_id, class: "font-weight-bold" %>
+        <%= form.text_field :game_id, placeholder: "Enter game_id", class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :user_id, class: "font-weight-bold" %>
+        <%= form.text_field :user_id, placeholder: "Enter user_id", class: "form-control" %>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label :total_points, class: "font-weight-bold" %>
+        <%= form.number_field :total_points, placeholder: "Enter total_points", class: "form-control" %>
+      </div>
+    </li>
+  </ul>
+  <div class="card-footer">
+    <%= link_to "Cancel", game_player, class: 'btn btn-outline-secondary float-left' if game_player.persisted? %>
+    <%= link_to "Cancel", game_players_path, class: 'btn btn-outline-secondary float-left' if !game_player.persisted? %>
+    <%= form.submit "Save", class: "btn btn-primary float-right" if game_player.persisted? %>
+    <%= form.submit "Create", class: "btn btn-primary float-right" if !game_player.persisted? %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,28 @@
+
+<div class="card shadow p-2">
+<h4>Players:</h4>
+  <ul class="players">
+    <% @game.game_players.each_with_index do |p, i| %>
+      <% li_class = "li_even" if i % 2 == 0 %>
+      <% li_class = "li_odd" if i % 2 == 1 %>
+      <li class="<%=li_class%>"><%= p.user.team_name%></li>
+      <li class="li_space">*<li>
+    <% end %>
+  </ul>
+</div>
+<br>
+<% if @game.game_state == GameState::CREATED %>
+  <button class="btn btn-primary" data-reflex="click->Game#start" data-game-id="<%=  @game.id %>">Start</button>
+<% end %>
+<% if @game.game_state == GameState::QUESTION_PLAY %>
+  <button class="btn btn-primary" data-reflex="click->Game#show" data-game-id="<%=  @game.id %>">Show Answer</button>
+<% end %>
+<% if @game.game_state == GameState::QUESTION_ANSWER %>
+  <button class="btn btn-primary" data-reflex="click->Game#bonus" data-game-id="<%=  @game.id %>">Play Bonus</button>
+<% end %>
+<% if @game.game_state == GameState::QUESTION_BONUS %>
+  <button class="btn btn-primary" data-reflex="click->Game#leaderboard" data-game-id="<%=  @game.id %>">Show LeaderBoard</button>
+<% end %>
+<% if @game.game_state == GameState::QUESTION_TABLE %>
+  <button class="btn btn-primary" data-reflex="click->Game#start" data-game-id="<%=  @game.id %>">Next Question</button>
+<% end %>

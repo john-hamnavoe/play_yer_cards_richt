@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_player: one
+  question: one
+  answer: 1.5
+  points: 1
+  bonus_points: 1
+
+two:
+  game_player: two
+  question: two
+  answer: 1.5
+  points: 1
+  bonus_points: 1

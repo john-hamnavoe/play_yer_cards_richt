@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Game_players", game_players_path %></li>
+  <li class="breadcrumb-item"><%= link_to @game_player.id, @game_player %></li>
+  <li class="breadcrumb-item active">Edit</li>
+</ol>
+
+<%= render 'form', game_player: @game_player %>

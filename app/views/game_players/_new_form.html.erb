@@ -1,0 +1,23 @@
+<% if game_player.errors.any? %>
+  <% game_player.errors.full_messages.each do |message| %>
+  <div class="alert alert-danger" role="alert">
+    <%= message %>
+  </div>
+  <% end %>
+<% end %>
+<%= form_with(model: game_player, local: true) do |form| -%>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <div class="form-group">
+        <%= form.label "PIN", class: "font-weight-bold" %>
+        <%= form.text_field :pin, placeholder: "Enter Game Pin", class: "form-control" %>
+      </div>
+    </li>
+  </ul>
+  <div class="card-footer">
+    <%= link_to "Cancel", root_path, class: 'btn btn-outline-secondary float-left' %>
+    <%= form.submit "Enter", class: "ml-4 btn btn-primary float-left" %>
+  </div>
+</div>
+<% end %>

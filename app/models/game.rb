@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :user
+  has_many :game_players
 
   before_create :generate_pin
 

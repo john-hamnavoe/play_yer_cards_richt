@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  include CableReady::Broadcaster
+
   before_action :authenticate_user!
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
@@ -66,7 +68,7 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.eager_load(game_players: :user).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

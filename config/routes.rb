@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :game_players, except: [:edit, :update]
   resources :game_questions
   resources :games
   resources :questions do

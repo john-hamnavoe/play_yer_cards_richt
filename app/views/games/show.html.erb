@@ -1,24 +1,10 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><%= link_to "Games", games_path %></li>
-  <li class="breadcrumb-item active mr-auto"><%= @game.id %></li> 
+  <li class="breadcrumb-item active mr-auto"><%= @game.name %></li> 
 </ol>
-<div class="card">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <p class="font-weight-bold">Name</p>
-      <p class="font-weight-normal"><%= @game.name %></p>
-    </li>
-    <li class="list-group-item">
-      <p class="font-weight-bold">User</p>
-      <p class="font-weight-normal"><%= @game.user %></p>
-    </li>
-    <li class="list-group-item">
-      <p class="font-weight-bold">Is complete</p>
-      <p class="font-weight-normal"><%= @game.is_complete %></p>
-    </li>
-    <li class="list-group-item">
-      <p class="font-weight-bold">Pin</p>
-      <p class="font-weight-normal"><%= @game.pin %></p>
-    </li>
-  </ul>
-</div>
+<div id="content"></div>
+<% if @game.user_id == current_user.id %>
+  <%= render 'show_host'%>
+<% else %>
+  <%= render 'show_player' %>
+<% end %>

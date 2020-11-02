@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_26_142710) do
+ActiveRecord::Schema.define(version: 2020_11_01_152251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_player_question_answers", force: :cascade do |t|
+    t.bigint "game_player_id", null: false
+    t.bigint "question_id", null: false
+    t.float "answer"
+    t.integer "points"
+    t.integer "bonus_points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_player_id"], name: "index_game_player_question_answers_on_game_player_id"
+    t.index ["question_id"], name: "index_game_player_question_answers_on_question_id"
+  end
+
+  create_table "game_players", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "total_points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_players_on_game_id"
+    t.index ["user_id"], name: "index_game_players_on_user_id"
+  end
 
   create_table "game_questions", force: :cascade do |t|
     t.bigint "game_id", null: false
@@ -37,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_10_26_142710) do
     t.integer "pin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "game_state", default: 0
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
@@ -64,6 +87,10 @@ ActiveRecord::Schema.define(version: 2020_10_26_142710) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "game_player_question_answers", "game_players"
+  add_foreign_key "game_player_question_answers", "questions"
+  add_foreign_key "game_players", "games"
+  add_foreign_key "game_players", "users"
   add_foreign_key "game_questions", "games"
   add_foreign_key "game_questions", "questions"
   add_foreign_key "game_questions", "users"

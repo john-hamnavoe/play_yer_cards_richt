@@ -1,0 +1,20 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Game_players", game_players_path %></li>
+  <li class="breadcrumb-item active mr-auto"><%= @game_player.id %></li> 
+</ol>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <p class="font-weight-bold">Game</p>
+      <p class="font-weight-normal"><%= @game_player.game %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">User</p>
+      <p class="font-weight-normal"><%= @game_player.user %></p>
+    </li>
+    <li class="list-group-item">
+      <p class="font-weight-bold">Total points</p>
+      <p class="font-weight-normal"><%= @game_player.total_points %></p>
+    </li>
+  </ul>
+</div>
