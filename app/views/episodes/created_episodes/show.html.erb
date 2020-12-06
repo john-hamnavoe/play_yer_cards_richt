@@ -1,0 +1,13 @@
+  <%= render 'shared/play_header', game: @game %>
+<div class="card shadow p-2">
+  <h2>Pin: <%= @game.pin %></h2>
+  <div
+    data-controller="content-loader"
+    data-content-loader-url="<%= players_game_path %>"
+    data-content-loader-refresh-interval="5000"
+  >
+    Loading Players...
+  </div>
+  <br>
+  <%= link_to "Start Game", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+</div>

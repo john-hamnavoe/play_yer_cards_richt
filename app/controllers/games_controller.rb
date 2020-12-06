@@ -32,7 +32,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to episodes_created_episode_path(@game.id), notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
@@ -63,6 +63,17 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def players
+    @game = Game.eager_load(game_players: :user).find_by(id: params[:id])
+    render partial: 'games/players', locals: { game: @game }
+  end
+
+  def players_answered
+    @game = Game.find_by(id: params[:id])
+    @game_player_answers = GamePlayerQuestionAnswer.eager_load(game_player: :user).where(game_question_id:  @game.current_game_question_id).order(:updated_at)
+    render partial: 'games/players_answered', locals: { game_player_answers: @game_player_answers }
   end
 
   private

@@ -1,0 +1,10 @@
+  <%= render 'shared/play_header', game: @game %>
+
+<div class="card shadow p-2">
+  <h2>Pin: <%= @game.pin %></h2>
+
+  <h2>Current Leaderboard:<h2>
+  <p>table</p>
+  <br>
+  <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+</div>

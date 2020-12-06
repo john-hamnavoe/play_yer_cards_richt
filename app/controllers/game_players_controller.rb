@@ -1,4 +1,5 @@
 class GamePlayersController < ApplicationController
+  include CableReady::Broadcaster
   before_action :set_game_player, only: [:show, :destroy]
 
   # GET /game_players
@@ -32,7 +33,9 @@ class GamePlayersController < ApplicationController
 
     respond_to do |format|
       if @game_player.save
-        format.html { redirect_to game_path(game), notice: 'Welcome to the Game!' }
+        format.html { 
+          redirect_to episodes_player_board_episode_path(game.id), notice: 'Welcome to the Game!' 
+        }
         format.json { render :show, status: :created, location: @game_player }
       else
         format.html { render :new }

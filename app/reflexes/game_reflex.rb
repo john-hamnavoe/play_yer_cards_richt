@@ -39,6 +39,10 @@ class GameReflex < ApplicationReflex
     change_state(GameState::QUESTION_TABLE)
   end
 
+  def answer
+    submit_answer
+  end
+
 private
 
   def change_state(state)
@@ -47,6 +51,15 @@ private
     game.game_state = state
     game.save
     cable_ready["game-stream"].dispatch_event name: "game:changed"
-    cable_ready.broadcast    
+    cable_ready.broadcast
+  end
+
+  def submit_answer
+    game_id = element.dataset["game-id"]
+    game = Game.find_by(id: game_id)
+    game.name = game.name + "X"
+    game.save
+    cable_ready["game-stream"].dispatch_event name: "game:changed"
+    cable_ready.broadcast
   end
 end

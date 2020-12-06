@@ -3,3 +3,7 @@ ul.players li { display:inline; }
 .li_even { color: #12e238; font-size: 1.5em; }
 .li_odd { color: #e212d8; font-size: 1.5em; }
 .li_space { color: #1729ea; font-size: 1.2em; }
+
+.li_even2 { color: #aa1d9a; font-size: 1.5em; }
+.li_odd2 { color: #0c10d1; font-size: 1.5em; }
+.li_space2 { color: #a0ea17; font-size: 1.2em; }

@@ -1,0 +1,18 @@
+  <%= render 'shared/play_header', game: @game %>
+<div class="card shadow p-2">
+  <h2>Pin: <%= @game.pin %></h2>
+
+  <h2>Question:<h2>
+  <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
+  <br>
+  <br>
+  <div
+    data-controller="content-loader"
+    data-content-loader-url="<%= players_answered_game_path %>"
+    data-content-loader-refresh-interval="5000"
+  >
+    Loading Playes Who Answered...
+  </div>
+  <br>
+  <%= link_to "Reveal Answer", episodes_host_answer_episode_path(@game.id), class: "btn btn-success"%>
+</div>

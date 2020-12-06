@@ -73,17 +73,19 @@ export default class extends ApplicationController {
     this.stimulate()
   }
   
-  higher() {
+  higher(event) {
+    const id = event.target.dataset.id;
     Rails.ajax({
       type: "patch",
-      url: "/dashboard/higher"
+      url: "/episodes/host_bonus_episodes/:id/higher".replace(':id', id)
     })
   }
   
-  lower() {
+  lower(event) {
+    const id = event.target.dataset.id;
     Rails.ajax({
       type: "patch",
-      url: "/dashboard/lower"
+      url: "/episodes/host_bonus_episodes/:id/lower".replace(':id', id)
     })
   }  
 }

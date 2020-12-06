@@ -1,0 +1,20 @@
+class Episodes::HostQuestionEpisodesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_next_question
+
+  def show
+    @game = Game.find_by(id: params[:id])
+    ActionCable.server.broadcast "game_channel", content: @game.id
+  end
+
+  private
+
+  def set_next_question
+    game = Game.find_by(id: params[:id])
+    return if game.game_state == GameState::QUESTION_PLAY
+
+    question = Question.where.not(id: GameQuestion.where(game: game).pluck(:question_id)).sample
+    game_question = GameQuestion.create(game: game, question: question)
+    game.update(game_state: GameState::QUESTION_PLAY, current_game_question: game_question)
+  end
+end

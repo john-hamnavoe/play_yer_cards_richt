@@ -1,4 +1,3 @@
-import CableReady from 'cable_ready'
 import consumer from "./consumer"
 
 consumer.subscriptions.create("GameChannel", {
@@ -11,6 +10,14 @@ consumer.subscriptions.create("GameChannel", {
   },
 
   received(data) {
-    if (data.cableReady) CableReady.perform(data.operations)
+    // Called when there's incoming data on the websocket for this channel
+    console.log("game", data)
+    const div_locale = document.getElementById(`game_${data.content}`);
+    console.log(data.content);
+    console.log(div_locale);  
+    if (div_locale)
+    { 
+      location.reload();
+    }
   }
 });

@@ -1,4 +1,4 @@
-
+  <%= render 'shared/play_header', game: @game %>
   <div class="card shadow">
     <% if @game.game_state == GameState::CREATED %>
       <ul class="list-group list-group-flush">
@@ -9,15 +9,24 @@
       </ul>
     <% end %>
     <% if @game.game_state == GameState::QUESTION_PLAY %>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <p class="font-weight-bold">Question</p>
-          <p class="font-weight-normal"><%= @game.current_game_question.question.question %></p>
-        </li>
-        <li class="list-group-item">
-          <button class="btn btn-primary" data-reflex="click->Game#answer" data-game-id="<%=  @game.id %>">Answer</button>        
-        </li>
-      </ul>
+      <div data-controller="answer">
+        <div data-target="answer.answerbox">
+          <% if @game_current_answer %>
+            <h2 class="text-success">Your Answer Has Been Submitted. Good Luck! The Quizmaster will reveal the answer soon.</h2>
+          <% else %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h2>Question</h2>
+                <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
+                <input type="number" class="form-control form-control-lg" style="max-width: 350px" data-target="answer.answervalue">
+              </li>
+              <li class="list-group-item">
+                <button class="btn btn-primary" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
     <% end %>
     <% if @game.game_state == GameState::QUESTION_ANSWER || @game.game_state == GameState::QUESTION_BONUS  %>
       <ul class="list-group list-group-flush">

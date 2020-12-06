@@ -1,0 +1,9 @@
+<h4>Answers Submitted By:</h4>
+  <ul class="players">
+    <% game_player_answers.each_with_index do |p, i| %>
+      <% li_class = "li_even2" if i % 2 == 0 %>
+      <% li_class = "li_odd2" if i % 2 == 1 %>
+      <li class="<%=li_class%>"><%= p.game_player.user.team_name%></li>
+      <li class="li_space2">*<li>
+    <% end %>
+  </ul>

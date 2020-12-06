@@ -6841,6 +6841,13 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stimulus-content-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-content-loader/-/stimulus-content-loader-1.0.0.tgz#1abe0f26730e0ae14c488a52ee766640a5c5fe3a"
+  integrity sha512-sQzBW/3hdS5mZrDv5a4WDntvWZhg3nlGu/svqPDk+HCzReii6XfLAkYgR3Z8R8RzhYe2kDdeACeyCkniwlcFug==
+  dependencies:
+    stimulus "^1.1.1"
+
 "stimulus@>= 1.1", stimulus@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-1.1.1.tgz#53c2fded6849e7b85eed3ed8dd76e33abd74bec5"

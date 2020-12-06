@@ -20,29 +20,4 @@
 <br>
 <p>Aces high, same card suit order: clubs (lowest), followed by diamonds, hearts, and spades (highest). </p>
 
-<div class="playingCards fourColours faceImages">
-  <ul class="table">
-    <% @cards.each_with_index do |card, index| %>
-      <% base_css = "card back" if index > @shown_cards %>
-      <% base_css = "card rank-#{card[0] == "t" ? "10" : card[0]} #{SuitProperty.find_by_code(card[1])[:css_suit]} " if index <= @shown_cards %>
-      <li>
-      <div class="<%= base_css %>">
-          <span class="rank"><%= card[0] == "t" ? "10" : card[0].upcase %></span>
-          <span class="suit">&<%= SuitProperty.find_by_code(card[1])[:span_suit] %>;</span>
-      </div>
-      </li>
-    <% end %>
-  </ul>
-  <button data-controller="example"  data-action="click->example#higher" class="btn btn-outline-info waves-effect btn-sm">Higher</button>
-  <button data-controller="example"  data-action="click->example#lower" class="btn btn-outline-info waves-effect btn-sm">Lower</button>  
-  <hr>
-
-  <% if !@last_guess_correct.nil? %>
-    <% if @last_guess_correct %>
-      <h5>Correct!<h5>
-    <% else %>
-      <h5>Wrong!</h5>
-    <% end %>
-  <% end %>   
-</div>
 

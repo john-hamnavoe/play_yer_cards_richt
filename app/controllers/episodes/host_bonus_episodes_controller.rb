@@ -1,27 +1,40 @@
-class DashboardController < ApplicationController
+class Episodes::HostBonusEpisodesController < ApplicationController
   before_action :authenticate_user!
-  
-  def index
+  before_action :set_game_state
 
+  def show
+    @game = Game.find_by(id: params[:id])
+    @cards = @game.current_game_question.current_cards
+    @shown_cards = @game.current_game_question.current_card
+    @last_guess_correct = @game.current_game_question.last_guess_correct
   end
 
   def higher
-    @question = GameQuestion.first
+    @game = Game.find_by(id: params[:id])
+    @question = @game.current_game_question
     @question.last_guess_correct = next_card_is_higher
     @question.current_card = @question.current_card + 1
     @question.save
-    redirect_to dashboard_index_path
+    redirect_to episodes_host_bonus_episode_path(@game.id)
   end
 
   def lower
-    @question = GameQuestion.first
+    @game = Game.find_by(id: params[:id])
+    @question = @game.current_game_question
     @question.last_guess_correct = next_card_is_lower
     @question.current_card = @question.current_card + 1
     @question.save
-    redirect_to dashboard_index_path
+    redirect_to episodes_host_bonus_episode_path(@game.id)
   end
 
   private
+
+  def set_game_state
+    game = Game.find_by(id: params[:id])
+    return if game.game_state == GameState::QUESTION_BONUS
+
+    game.update(game_state: GameState::QUESTION_BONUS)
+  end
 
   def next_card_is_higher
     current_card_rank, next_card_rank = ranks
