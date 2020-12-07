@@ -1,4 +1,4 @@
-class GameState < ApplicationRecord  
+class GameState < ApplicationRecord
   def readonly?
     true
   end

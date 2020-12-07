@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class SuitProperty
-
   def self.find_by_code(code)
     SuitProperty.all.find { |e| e[:code] == code }
   end
 
   def self.all
-    [ 
+    [
       {
         code: "h",
         css_suit: "hearts",

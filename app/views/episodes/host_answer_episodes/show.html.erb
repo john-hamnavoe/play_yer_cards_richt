@@ -1,31 +1,34 @@
   <%= render 'shared/play_header', game: @game %>
 <div class="card shadow p-2">
-  <h2>Pin: <%= @game.pin %></h2>
+  <div class="card-body">
+    <h2>Question:<h2>
+    <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
 
-  <h2>Question:<h2>
-  <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
+    <h2>Answer:<h2>
+    <h1 class="text-secondary"><%= @game.current_game_question.question.answer.to_i %></h1>
 
-  <h2>Answer:<h2>
-  <h1 class="text-secondary"><%= @game.current_game_question.question.answer %></h1>
-  <br>
-  <br>
-  <h2>Table:</h2>
-  <table class="table">
-    <tr>
-      <th>Team Name</th>
-      <th>Answer</th>
-      <th>Difference</th>
-      <th>Time</th>
-    </tr>
-    <% @game_player_question_answers.each do |gpqa| %>
+    <h2>Table:</h2>
+    <table class="table">
       <tr>
-        <th><%= gpqa.game_player.user.team_name %></th>
-        <td class="text-secondary"><%= gpqa.answer %></td>
-        <td class="text-danger"><%=  @game.current_game_question.question.answer - gpqa.answer if gpqa.answer %></td>
-        <td><%= gpqa.updated_at %></td>
+        <th>#</th>
+        <th>Team Name</th>
+        <th>Answer</th>
+        <th>Difference</th>
+        <th>Points</th>
+        <th>Time</th>
       </tr>
-    <% end %>
-  </table>
-  <br>
-  <%= link_to "Play Bonus Round", episodes_host_bonus_episode_path(@game.id), class: "btn btn-success"%>
+      <% @game_player_question_answers.each_with_index do |gpqa, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <th><%= gpqa.game_player.user.team_name %></th>
+          <td class="text-secondary"><%= gpqa.answer %></td>
+          <td class="text-danger"><%=  gpqa.answer - @game.current_game_question.question.answer if gpqa.answer %></td>
+          <td class="text-primary"><%=  gpqa.points %></td>          
+          <td><%= gpqa.created_at %></td>
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <%= link_to "Play Bonus Round", episodes_host_bonus_episode_path(@game.id), class: "btn btn-success"%>
+  </div>
 </div>

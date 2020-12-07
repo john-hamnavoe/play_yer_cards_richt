@@ -4,7 +4,4 @@ class Episodes::CreatedEpisodesController < ApplicationController
   def show
     @game = Game.find_by(id: params[:id])
   end
-  
-  private
-  
 end

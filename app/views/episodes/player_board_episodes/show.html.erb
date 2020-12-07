@@ -1,49 +1,49 @@
-  <%= render 'shared/play_header', game: @game %>
+    <h2 class="text-info"><%= @game.name %></h2>
   <div class="card shadow">
-    <% if @game.game_state == GameState::CREATED %>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <p class="font-weight-bold">Please Wait</p>
-          <p class="font-weight-normal">Your host will start the game directly...</p>
-        </li>
-      </ul>
-    <% end %>
-    <% if @game.game_state == GameState::QUESTION_PLAY %>
-      <div data-controller="answer">
-        <div data-target="answer.answerbox">
-          <% if @game_current_answer %>
-            <h2 class="text-success">Your Answer Has Been Submitted. Good Luck! The Quizmaster will reveal the answer soon.</h2>
-          <% else %>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <h2>Question</h2>
-                <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
-                <input type="number" class="form-control form-control-lg" style="max-width: 350px" data-target="answer.answervalue">
-              </li>
-              <li class="list-group-item">
-                <button class="btn btn-primary" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
-              </li>
-            </ul>
-          <% end %>
+    <div class="card-header">
+      Current Points: <%= @game_player.total_points %>
+    </div>
+    <div class="card-body">
+      <% if @game.game_state == GameState::CREATED %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="font-weight-bold">Please Wait</p>
+            <p class="font-weight-normal">Your host will start the game directly...</p>
+          </li>
+        </ul>
+      <% end %>
+      <% if @game.game_state == GameState::QUESTION_PLAY %>
+        <div data-controller="answer">
+          <div data-target="answer.answerbox">
+            <% if @game_current_answer %>
+              <h2 class="text-success">Your Answer Has Been Submitted. Good Luck! The Quizmaster will reveal the answer soon.</h2>
+            <% else %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h2>Question</h2>
+                  <p class="text-primary"><%= @game.current_game_question.question.question %></p>
+                  <input type="number" autofocus class="form-control form-control-lg" style="max-width: 350px" data-target="answer.answervalue">
+                </li>
+                <li class="list-group-item">
+                  <button class="btn btn-primary" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
+                </li>
+              </ul>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
-    <% if @game.game_state == GameState::QUESTION_ANSWER || @game.game_state == GameState::QUESTION_BONUS  %>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <p class="font-weight-bold">Answer and Bonus Round</p>
-          <p class="font-weight-normal">Checking Answer and playing the bonus round</p>
-        </li>
-      </ul>
-    <% end %> 
-    <% if @game.game_state == GameState::QUESTION_TABLE  %>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <p class="font-weight-bold">The LeaderBoard...</p>
-          <p class="font-weight-normal">You are x of y...keep going!</p>
-        </li>
-      </ul>
-    <% end %>       
+      <% end %>
+      <% if @game.game_state == GameState::QUESTION_ANSWER || @game.game_state == GameState::QUESTION_BONUS || @game.game_state == GameState::QUESTION_TABLE  %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="font-weight-bold">Answer and Bonus Round</p>
+            <p class="font-weight-normal">Checking Answer and playing the bonus round</p>
+          </li>
+        </ul>
+      <% end %>      
+    </div>
+    <div class="card-footer">
+      <%= link_to "Refresh", episodes_player_board_episode_path(@game.id), class: "btn btn-success"%>
+    </div>
   </div>
 
 <div id="<%= "game_#{@game.id}"%>"></div>

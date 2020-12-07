@@ -22,10 +22,8 @@ class GamePlayersController < ApplicationController
   # POST /game_players.json
   def create
     game = Game.find_by(pin: game_player_params[:pin], is_complete: false)
-    
-    unless game
-      redirect_to(new_game_player_path, notice: "An active game with pin #{game_player_params[:pin]} was not found, please try again.") and return
-    end
+
+    redirect_to(new_game_player_path, notice: "An active game with pin #{game_player_params[:pin]} was not found, please try again.") and return unless game
 
     @game_player = GamePlayer.new
     @game_player.user = current_user
@@ -33,8 +31,8 @@ class GamePlayersController < ApplicationController
 
     respond_to do |format|
       if @game_player.save
-        format.html { 
-          redirect_to episodes_player_board_episode_path(game.id), notice: 'Welcome to the Game!' 
+        format.html {
+          redirect_to episodes_player_board_episode_path(game.id), notice: "Welcome to the Game!"
         }
         format.json { render :show, status: :created, location: @game_player }
       else
@@ -49,19 +47,20 @@ class GamePlayersController < ApplicationController
   def destroy
     @game_player.destroy
     respond_to do |format|
-      format.html { redirect_to game_players_url, notice: 'Game player was successfully destroyed.' }
+      format.html { redirect_to game_players_url, notice: "Game player was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game_player
-      @game_player = GamePlayer.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def game_player_params
-      params.require(:game_player).permit(:pin)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game_player
+    @game_player = GamePlayer.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def game_player_params
+    params.require(:game_player).permit(:pin)
+  end
 end

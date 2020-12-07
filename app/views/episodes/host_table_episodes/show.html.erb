@@ -1,10 +1,42 @@
   <%= render 'shared/play_header', game: @game %>
 
 <div class="card shadow p-2">
-  <h2>Pin: <%= @game.pin %></h2>
-
-  <h2>Current Leaderboard:<h2>
-  <p>table</p>
-  <br>
-  <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+  <div class="card-body">
+    <h2>This Round:</h2>
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Team Name</th>
+        <th>Question Points</th>
+        <th>Bonus Points</th>
+        <th>Total Points</th>
+      </tr>
+      <% @game_player_question_answers.each_with_index do |gpqa, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <th><%= gpqa.game_player.user.team_name %></th>
+          <td class="text-secondary"><%= gpqa.points %></td>
+          <td class="text-info"><%=  gpqa.bonus_points %></td>
+          <td class="text-primary"><%=  gpqa.points + (gpqa.bonus_points || 0) %></td>          
+        </tr>
+      <% end %>
+    </table>
+    <h2>Overall Leaderboard:</h2>
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Team Name</th>
+        <th>Total Points</th>
+      </tr>
+      <% @game_players.each_with_index do |gp, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <th><%= gp.user.team_name %></th>
+          <td class="text-primary"><%= gp.total_points %></td>     
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+  </div>
 </div>

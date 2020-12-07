@@ -4,6 +4,6 @@ module ApplicationCable
 
     def connect
       self.session_id = cookies.encrypted[:session_id]
-    end    
+    end
   end
 end

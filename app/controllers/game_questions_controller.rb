@@ -28,7 +28,7 @@ class GameQuestionsController < ApplicationController
 
     respond_to do |format|
       if @game_question.save
-        format.html { redirect_to @game_question, notice: 'Game question was successfully created.' }
+        format.html { redirect_to @game_question, notice: "Game question was successfully created." }
         format.json { render :show, status: :created, location: @game_question }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class GameQuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @game_question.update(game_question_params)
-        format.html { redirect_to @game_question, notice: 'Game question was successfully updated.' }
+        format.html { redirect_to @game_question, notice: "Game question was successfully updated." }
         format.json { render :show, status: :ok, location: @game_question }
       else
         format.html { render :edit }
@@ -56,19 +56,20 @@ class GameQuestionsController < ApplicationController
   def destroy
     @game_question.destroy
     respond_to do |format|
-      format.html { redirect_to game_questions_url, notice: 'Game question was successfully destroyed.' }
+      format.html { redirect_to game_questions_url, notice: "Game question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game_question
-      @game_question = GameQuestion.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def game_question_params
-      params.require(:game_question).permit(:game_id, :question_id, :current_card, :card_deck)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game_question
+    @game_question = GameQuestion.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def game_question_params
+    params.require(:game_question).permit(:game_id, :question_id, :current_card, :card_deck)
+  end
 end

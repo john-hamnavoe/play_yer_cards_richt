@@ -16,5 +16,4 @@ class Episodes::PlayerBoardEpisodesController < ApplicationController
     game_question_answer.answer = answer
     game_question_answer.save
   end
-
 end

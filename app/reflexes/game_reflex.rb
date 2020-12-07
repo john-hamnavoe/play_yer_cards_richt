@@ -43,7 +43,7 @@ class GameReflex < ApplicationReflex
     submit_answer
   end
 
-private
+  private
 
   def change_state(state)
     game_id = element.dataset["game-id"]

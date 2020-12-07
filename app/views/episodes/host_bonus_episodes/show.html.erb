@@ -1,35 +1,78 @@
-  <%= render 'shared/play_header', game: @game %>
+<%= render 'shared/play_header', game: @game %>
 <div class="card shadow p-2">
-  <h2>Pin: <%= @game.pin %></h2>
-
-  <h1 class="text-success">Bonus Round</h1>
-  <br>
-  <div class="playingCards fourColours faceImages">
-  <p>Aces high, same card suit order: clubs (lowest), followed by diamonds, hearts, and spades (highest). </p>
-      <ul class="table">
+  <div class="card-body">
+    <h1 class="text-success">Bonus Round - *** <%= @game.current_game_question.user.team_name if @game.current_game_question.user %> *** team controls the board</h1>
+    <br>
+    <div class="playingCards fourColours faceImages">
+      <p>Aces high, same card suit order: clubs (lowest), followed by diamonds, hearts, and spades (highest). </p>
+      <div class="row">
+        <div class="col-lg-12">
+          <% if !@last_guess_correct.nil? %>
+            <% if  @shown_cards == 5 %>
+              <% if @last_guess_correct %>
+                <h1 class="text-success">Well Done! You Collect Maximum Bonus Points!</h1>
+              <% else %>
+                <h1 class="text-danger">Oh No! You have blown it. 10 points to everyone else!</h1>
+              <% end %>            
+            <% else %>
+              <% if @last_guess_correct %>
+                <h1 class="text-success">Correct! Dare to Play On?</h1>
+              <% else %>
+                <h1 class="text-danger">Wrong! Wrong! Control Goes to <%= @game.current_game_question.user.team_name %></h1>
+              <% end %>            
+            <% end %>
+          <% end %>
+        </div> 
+      </div>      
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
         <% @cards.each_with_index do |card, index| %>
           <% base_css = "card back" if index > @shown_cards %>
           <% base_css = "card rank-#{card[0] == "t" ? "10" : card[0]} #{SuitProperty.find_by_code(card[1])[:css_suit]} " if index <= @shown_cards %>
-          <li>
-          <div class="<%= base_css %>">
-              <span class="rank"><%= card[0] == "t" ? "10" : card[0].upcase %></span>
-              <span class="suit">&<%= SuitProperty.find_by_code(card[1])[:span_suit] %>;</span>
+          <div class="col-lg-1 text-center">
+            <div class="<%= base_css %>">
+                <span class="rank"><%= card[0] == "t" ? "10" : card[0].upcase %></span>
+                <span class="suit">&<%= SuitProperty.find_by_code(card[1])[:span_suit] %>;</span>
+            </div>
           </div>
-          </li>
         <% end %>
-      </ul>
-      <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#higher" class="btn btn-outline-info waves-effect btn-sm">Higher</button>
-      <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#lower" class="btn btn-outline-info waves-effect btn-sm">Lower</button>  
-    <hr>
-
-    <% if !@last_guess_correct.nil? %>
-      <% if @last_guess_correct %>
-        <h5>Correct!</h5>
-      <% else %>
-        <h5>Wrong!</h5>
-      <% end %>
-    <% end %>   
-  </div>  
-  <br>
-  <%= link_to "See Leaderboard", episodes_host_table_episode_path(@game.id), class: "btn btn-success"%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1">
+        <h3 class="text-primary">pts:</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">0</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">5</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">10</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">20</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">30</h3>
+      </div>
+      <div class="col-lg-1 text-center">
+        <h3 class="text-primary">50</h3>
+      </div>                       
+    </div>
+    <div class="row">
+      <div class="col-lg-1 offset-lg-3">
+        <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#higher" class="btn btn-outline-info waves-effect btn-lg">Higher</button>
+      </div>
+      <div class="col-lg-1">
+        <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#lower" class="btn btn-outline-info waves-effect btn-lg">Lower</button>  
+      </div>
+      <div class="col-lg-1  offset-lg-2">
+        <%= link_to "Take the Points", episodes_host_table_episode_path(@game.id), class: "btn btn-success" if @last_guess_correct %>
+        <%= link_to "Finish Round", episodes_host_table_episode_path(@game.id), class: "btn btn-success" if !@last_guess_correct && @shown_cards == 5 %>
+      </div>      
+    </div>
+  </div>
 </div>
