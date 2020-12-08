@@ -64,10 +64,10 @@
     </div>
     <div class="row">
       <div class="col-lg-1 offset-lg-3">
-        <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#higher" class="btn btn-outline-info waves-effect btn-lg">Higher</button>
+        <button data-controller="card" data-id="<%= @game.id %>" data-action="click->card#higher" class="btn btn-outline-info waves-effect btn-lg">Higher</button>
       </div>
       <div class="col-lg-1">
-        <button data-controller="example" data-id="<%= @game.id %>" data-action="click->example#lower" class="btn btn-outline-info waves-effect btn-lg">Lower</button>  
+        <button data-controller="card" data-id="<%= @game.id %>" data-action="click->card#lower" class="btn btn-outline-info waves-effect btn-lg">Lower</button>  
       </div>
       <div class="col-lg-1  offset-lg-2">
         <%= link_to "Take the Points", episodes_host_table_episode_path(@game.id), class: "btn btn-success" if @last_guess_correct %>
