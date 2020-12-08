@@ -1,0 +1,24 @@
+  <%= render 'shared/play_header', game: @game %>
+
+<div class="card shadow p-2">
+  <div class="card-body">
+    <h1 class="text-success">Congratulations <%= @game_players[0].user.team_name %> you have Won!!!!!</h1>
+    <h2>Final Leaderboard:</h2>
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Team Name</th>
+        <th>Total Points</th>
+      </tr>
+      <% @game_players.each_with_index do |gp, i| %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <th><%= gp.user.team_name %></th>
+          <td class="text-primary"><%= gp.total_points %></td>     
+        </tr>
+      <% end %>
+    </table>
+    <br>
+    <%= link_to "Game Menu", games_path, class: "btn btn-success"%>
+  </div>
+</div>

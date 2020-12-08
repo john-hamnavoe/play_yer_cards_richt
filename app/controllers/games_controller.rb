@@ -13,11 +13,24 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    if @game.game_state == GameState::CREATED 
+      redirect_to episodes_created_episode_path(@game.id)
+    elsif @game.game_state == GameState::QUESTION_PLAY 
+      redirect_to episodes_host_question_episode_path(@game.id)
+    elsif @game.game_state == GameState::QUESTION_ANSWER
+      redirect_to episodes_host_answer_episode_path(@game.id)
+    elsif @game.game_state == GameState::QUESTION_BONUS
+      redirect_to episodes_host_bonus_episode_path(@game.id)
+    elsif @game.game_state == GameState::QUESTION_TABLE
+      redirect_to episodes_host_table_episode_path(@game.id)
+    else
+      redirect_to episodes_finished_episode_path(@game.id)
+    end
   end
 
   # GET /games/new
   def new
-    @game = Game.new
+    @game = Game.new(number_of_questions: 30)
   end
 
   # GET /games/1/edit
@@ -85,6 +98,6 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:name, :user_id, :is_complete, :pin)
+    params.require(:game).permit(:name, :user_id, :is_complete, :pin, :number_of_questions, :question_number)
   end
 end

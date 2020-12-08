@@ -1,5 +1,4 @@
 class GamePlayersController < ApplicationController
-  include CableReady::Broadcaster
   before_action :set_game_player, only: [:show, :destroy]
 
   # GET /game_players
@@ -24,6 +23,8 @@ class GamePlayersController < ApplicationController
     game = Game.find_by(pin: game_player_params[:pin], is_complete: false)
 
     redirect_to(new_game_player_path, notice: "An active game with pin #{game_player_params[:pin]} was not found, please try again.") and return unless game
+
+    redirect_to episodes_player_board_episode_path(game.id) and return if GamePlayer.where(game: game, user: current_user).exists?
 
     @game_player = GamePlayer.new
     @game_player.user = current_user

@@ -1,9 +1,10 @@
   <%= render 'shared/play_header', game: @game %>
 <div class="card shadow p-2">
   <div class="card-body">
-    <h2>Question:<h2>
+    <h2>Question #<%= @game.question_number %> of <%= @game.number_of_questions %>:<h2>
     <h1 class="text-primary"><%= @game.current_game_question.question.question %></h2>
     <br>
+    <%= render partial: "games/players", locals: { game: @game } %>
     <br>
     <div
       data-controller="content-loader"

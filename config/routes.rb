@@ -30,6 +30,6 @@ Rails.application.routes.draw do
     end
     resources :host_table_episodes, only: [:show]
     resources :player_board_episodes, only: [:show, :update]    
-    resources :finish_episodes, only: [:show]
+    resources :finished_episodes, only: [:show]
   end  
 end

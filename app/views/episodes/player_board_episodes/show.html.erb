@@ -4,6 +4,9 @@
       Current Points: <%= @game_player.total_points %>
     </div>
     <div class="card-body">
+      <% unless @game.game_state == GameState::CREATED || @game.game_state == GameState::FINISHED %>
+        <small>Question #<%= @game.question_number %> of <%= @game.number_of_questions %></small>
+      <% end %>
       <% if @game.game_state == GameState::CREATED %>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -39,7 +42,24 @@
             <p class="font-weight-normal">Checking Answer and playing the bonus round</p>
           </li>
         </ul>
-      <% end %>      
+      <% end %>   
+      <% if @game.game_state == GameState::FINISHED  %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <p class="font-weight-bold">Game Over!</p>
+            <p class="font-weight-normal">Thanks for Playing!</p>
+            <% index = @all_players.index { |ap| ap.user.id == current_user.id } + 1 %>
+            <% if @all_players[0].user_id == current_user.id %>
+              <h3 class="text-success">No time for losers cause YOU are the champion! </h3>
+            <% elsif index ==  @all_players.count %>
+              <h3 class="text-danger">(Remember it is the taking part that counts!)</h3 >
+            <% else %>
+              <h3 class="text-info">It's mid table respectability for you!</h3 >              
+            <% end %>              
+            <p class="font-weight-normal">You finished <%= index %> of <%= @all_players.count %></p>
+          </li>
+        </ul>
+      <% end %>            
     </div>
     <div class="card-footer">
       <%= link_to "Refresh", episodes_player_board_episode_path(@game.id), class: "btn btn-success"%>

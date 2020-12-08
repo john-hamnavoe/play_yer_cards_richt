@@ -15,6 +15,6 @@ class Episodes::HostQuestionEpisodesController < ApplicationController
 
     question = Question.where.not(id: GameQuestion.where(game: game).pluck(:question_id)).sample
     game_question = GameQuestion.create(game: game, question: question)
-    game.update(game_state: GameState::QUESTION_PLAY, current_game_question: game_question)
+    game.update(game_state: GameState::QUESTION_PLAY, current_game_question: game_question, question_number: game.question_number + 1)
   end
 end

@@ -37,6 +37,10 @@
       <% end %>
     </table>
     <br>
-    <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
-  </div>
+    <% if @game.number_of_questions == @game.question_number %>
+      <%= link_to "Finish Quiz", episodes_finished_episode_path(@game.id), class: "btn btn-success"%>
+    <% else %>
+      <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+    <% end %>  
+    </div>
 </div>

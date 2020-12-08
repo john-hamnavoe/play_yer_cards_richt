@@ -21,8 +21,8 @@
         <tr>
           <td><%= i + 1 %></td>
           <th><%= gpqa.game_player.user.team_name %></th>
-          <td class="text-secondary"><%= gpqa.answer %></td>
-          <td class="text-danger"><%=  gpqa.answer - @game.current_game_question.question.answer if gpqa.answer %></td>
+          <td class="text-secondary"><%= gpqa.answer.to_i %></td>
+          <td class="text-danger"><%=  (gpqa.answer - @game.current_game_question.question.answer).to_i if gpqa.answer %></td>
           <td class="text-primary"><%=  gpqa.points %></td>          
           <td><%= gpqa.created_at %></td>
         </tr>

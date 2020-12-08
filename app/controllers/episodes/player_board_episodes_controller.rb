@@ -5,6 +5,7 @@ class Episodes::PlayerBoardEpisodesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     @game_player = GamePlayer.find_by(game: @game, user: current_user)
     @game_current_answer = GamePlayerQuestionAnswer.find_by(game_player: @game_player, game_question_id: @game.current_game_question_id)
+    @all_players = GamePlayer.where(game: @game).order(total_points: :desc)
   end
 
   def update
