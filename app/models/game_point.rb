@@ -9,6 +9,8 @@ class GamePoint < ApplicationRecord
   QUESTION_FOURTH = 10
   QUESTION_NO_SCORE = 0
 
+  QUESTION_EXACT_MATCH = 20
+
   BONUS_FIVE = 50
   BONUS_FOUR = 30
   BONUS_THREE = 20

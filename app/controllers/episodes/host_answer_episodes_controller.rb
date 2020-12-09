@@ -35,6 +35,8 @@ class Episodes::HostAnswerEpisodesController < ApplicationController
       gpqa.points = GamePoint::QUESTION_FOURTH if i == 3
       gpqa.points = GamePoint::QUESTION_NO_SCORE if i >= 4
 
+      gpqa.points += GamePoint::QUESTION_EXACT_MATCH if gpqa.answer == game_question.question.answer
+
       gpqa.save
     end
 

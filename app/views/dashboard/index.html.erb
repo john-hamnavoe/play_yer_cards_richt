@@ -1,11 +1,55 @@
-<h1>Play Yer Cards Richt</h1>
-<div class="card shadow p-3 mb-5 rounded">
-  <h5 class="card-header">Join A Game</h5>
-  <div class="card-body">
-    <h5 class="card-title">Got a Pin?</h5>
-    <p class="card-text">If you are wanting to join a game click the button to enter your pin.</p>
-    <%= link_to "Enter Pin", new_game_player_path, class: "btn btn-success"%>
+
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Welcome to Play Yer Cards Richt!</h1>
+      <p>Got a Pin?  If you are wanting to join a game click the button to enter your pin and play!</p>
+      <%= link_to "Enter Pin", new_game_player_path, class: "btn btn-success"%>
+    </div>
   </div>
-</div>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Playing the Game</h2>
+        <p>Each round of the game consists of a question follwed by the bonus board. The game master will determine the number of rounds that are played. Each answer will be a number, this can include years if the question has a year answer you should enter the full 4 digit year.  </p>
+        <p>After each question points are allocated as explained in the question scoring section.</p>
+        <p>After each question the bonus board is played. The top ranked player will have control of the bonus board (see question scoring on how rankings work).</p>
+        <p>The bonus board points are added to the question points to give a total for the round for each player and these are added to each players overall total.</p>
+        <p>At the end of the quiz the winner is person with the most accumulated points.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Question Scoring</h2>
+        <p> For each question players are ranked from top to bottom based on how close they got to the answer (+/-). If two players get the same answer they are ranked based on who was the quickest to submit an answer.</p>
+        <p>The top 4 ranked players get points as follows:</p>
+        <ul>
+          <li> 1st. 50 pts </li>
+          <li> 2nd. 30 pts </li>
+          <li> 3rd. 20 pts </li>
+          <li> 4th. 10 pts </li>
+        </ul>
+        <p>Additionally each player who gets the exact answer gets 20 points, meaning if you rank first with an exact score you get 70 points!</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Bonus Board</h2>
+        <p>The bonus board is a sequence of 6 standard playing cards with the first card face up.</p>
+        <p>The controlling player then tells the quizmaster wether they think the next card will be higher or lower than the currently shown card.</p>
+        <p>If the player is correct they can choose to take the points based on the number of cards they have guessed correctly or try to guess the next higher or lower card.</p>
+        <p>If the player is wrong then control of the board passes to the next ranked player, they must play the first card they have.</p>
+        <p>As before if the next ranked player is correct they can take the points or they can continue, and if they are wrong they will cede control to the next player.</p>
+        <p>Depending where you stop you get the following bonus points:</p>
+        <ul>
+          <li> 1st. 5 pts </li>
+          <li> 2nd. 10 pts </li>
+          <li> 3rd. 20 pts </li>
+          <li> 4th. 30 pts </li>
+          <li> 5th. 50 pts </li>
+        </ul>
+        <p>If the controlling player is wrong on the reveal of the last card all other players will get 10 bonus points and the controlling player gets none.</p>
+      </div>
+    </div>
 
+    <hr>
+
+  </div> <!-- /container -->
