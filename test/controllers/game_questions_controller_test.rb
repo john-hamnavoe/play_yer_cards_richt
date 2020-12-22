@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class GameQuestionsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
     @game_question = game_questions(:one)
   end
 
@@ -36,13 +40,5 @@ class GameQuestionsControllerTest < ActionDispatch::IntegrationTest
   test "should update game_question" do
     patch game_question_url(@game_question), params: { game_question: { card_deck: @game_question.card_deck, current_card: @game_question.current_card, game_id: @game_question.game_id, question_id: @game_question.question_id } }
     assert_redirected_to game_question_url(@game_question)
-  end
-
-  test "should destroy game_question" do
-    assert_difference('GameQuestion.count', -1) do
-      delete game_question_url(@game_question)
-    end
-
-    assert_redirected_to game_questions_url
   end
 end

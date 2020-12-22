@@ -13,7 +13,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    if @game.game_state == GameState::CREATED 
+    if @game.game_state == GameState::CREATED
       redirect_to episodes_created_episode_path(@game.id)
     elsif @game.game_state == GameState::QUESTION_PLAY 
       redirect_to episodes_host_question_episode_path(@game.id)

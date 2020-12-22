@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class GamesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
     @game = games(:one)
   end
 
@@ -20,12 +24,12 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
       post games_url, params: { game: { is_complete: @game.is_complete, name: @game.name, pin: @game.pin, user_id: @game.user_id } }
     end
 
-    assert_redirected_to game_url(Game.last)
+    assert_redirected_to episodes_created_episode_url(Game.last)
   end
 
   test "should show game" do
     get game_url(@game)
-    assert_response :success
+    assert_redirected_to episodes_created_episode_url(@game)
   end
 
   test "should get edit" do
@@ -36,13 +40,5 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   test "should update game" do
     patch game_url(@game), params: { game: { is_complete: @game.is_complete, name: @game.name, pin: @game.pin, user_id: @game.user_id } }
     assert_redirected_to game_url(@game)
-  end
-
-  test "should destroy game" do
-    assert_difference('Game.count', -1) do
-      delete game_url(@game)
-    end
-
-    assert_redirected_to games_url
   end
 end

@@ -4,7 +4,7 @@ class Episodes::HostQuestionEpisodesController < ApplicationController
 
   def show
     @game = Game.find_by(id: params[:id])
-    ActionCable.server.broadcast "game_channel", content: @game.id
+    ActionCable.server.broadcast "game_channel", { content: @game.id }
   end
 
   private

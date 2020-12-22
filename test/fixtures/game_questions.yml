@@ -4,10 +4,8 @@ one:
   game: one
   question: one
   current_card: 
-  card_deck: MyString
 
 two:
   game: two
   question: two
   current_card: 
-  card_deck: MyString

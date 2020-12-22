@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
+    sign_in @user
     @question = questions(:one)
   end
 
@@ -36,13 +40,5 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
   test "should update question" do
     patch question_url(@question), params: { question: { answer: @question.answer, is_public: @question.is_public, question: @question.question, user_id: @question.user_id } }
     assert_redirected_to question_url(@question)
-  end
-
-  test "should destroy question" do
-    assert_difference('Question.count', -1) do
-      delete question_url(@question)
-    end
-
-    assert_redirected_to questions_url
   end
 end

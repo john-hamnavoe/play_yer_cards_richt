@@ -10,7 +10,7 @@ class Episodes::HostAnswerEpisodesController < ApplicationController
       game_player: :user
     ).where(
       game_question_id: @game.current_game_question_id
-    ).order("ABS(COALESCE(answer,0) - #{answer})", created_at: :asc)
+    ).order(Arel.sql("ABS(COALESCE(answer,0) - #{answer})"), created_at: :asc)
   end
 
   private
@@ -23,7 +23,7 @@ class Episodes::HostAnswerEpisodesController < ApplicationController
 
     game_player_question_answers = GamePlayerQuestionAnswer.where(
       game_question_id: game.current_game_question_id
-    ).order("ABS(COALESCE(answer,0) - #{game_question.question.answer})", created_at: :asc)
+    ).order(Arel.sql("ABS(COALESCE(answer,0) - #{game_question.question.answer})"), created_at: :asc)
 
     game_question.user_id = game_player_question_answers[0].game_player.user_id
     game_question.save

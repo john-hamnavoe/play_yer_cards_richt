@@ -2,12 +2,18 @@
 
 one:
   question: MyString
-  answer: 1.5
+  answer: 1974
   is_public: false
   user: one
 
 two:
   question: MyString
-  answer: 1.5
+  answer: 1974
   is_public: false
-  user: two
+  user: one
+
+three:
+  question: MyString
+  answer: 1974
+  is_public: false
+  user: one  

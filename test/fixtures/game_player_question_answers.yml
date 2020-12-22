@@ -2,14 +2,14 @@
 
 one:
   game_player: one
-  question: one
+  game_question: one
   answer: 1.5
   points: 1
   bonus_points: 1
 
 two:
   game_player: two
-  question: two
+  game_question: two
   answer: 1.5
   points: 1
   bonus_points: 1

@@ -25,11 +25,14 @@
                 <li class="list-group-item">
                   <h2>Question</h2>
                   <p class="text-primary"><%= @game.current_game_question.question.question %></p>
-                  <input type="number" autofocus class="form-control form-control-lg" style="max-width: 350px" data-target="answer.answervalue">
                 </li>
                 <li class="list-group-item">
-                  <button class="btn btn-primary" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
+                  <form class="form-inline">
+                  <input type="number" autofocus class="form-control form-control-lg" style="max-width: 300px" data-target="answer.answervalue">
+                  <button class="btn btn-primary btn-lg" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
+                  </form>
                 </li>
+                 
               </ul>
             <% end %>
           </div>
@@ -59,6 +62,7 @@
             <p class="font-weight-normal">You finished <%= index %> of <%= @all_players.count %></p>
           </li>
         </ul>
+        <%= link_to "Finish", root_path, class: "btn btn-primary"%>
       <% end %>            
     </div>
     <div class="card-footer">
