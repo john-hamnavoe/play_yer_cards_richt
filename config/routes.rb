@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       end
     end
     resources :host_table_episodes, only: [:show]
+    resources :host_leaderboard_episodes, only: [:show]
     resources :player_board_episodes, only: [:show, :update]    
     resources :finished_episodes, only: [:show]
   end  

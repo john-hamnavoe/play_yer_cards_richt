@@ -1,7 +1,7 @@
     <h2 class="text-info"><%= @game.name %></h2>
   <div class="card shadow">
     <div class="card-header">
-      Current Points: <%= @game_player.total_points %>
+      <b>Current Points: <%= @game_player.total_points %></b>
     </div>
     <div class="card-body">
       <% unless @game.game_state == GameState::CREATED || @game.game_state == GameState::FINISHED %>
@@ -16,26 +16,26 @@
         </ul>
       <% end %>
       <% if @game.game_state == GameState::QUESTION_PLAY %>
-        <div data-controller="answer">
-          <div data-target="answer.answerbox">
-            <% if @game_current_answer %>
-              <h2 class="text-success">Your Answer Has Been Submitted. Good Luck! The Quizmaster will reveal the answer soon.</h2>
-            <% else %>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h2>Question</h2>
-                  <p class="text-primary"><%= @game.current_game_question.question.question %></p>
-                </li>
-                <li class="list-group-item">
-                  <form class="form-inline">
-                  <input type="number" autofocus class="form-control form-control-lg" style="max-width: 300px" data-target="answer.answervalue">
-                  <button class="btn btn-primary btn-lg" data-game-id="<%= @game.id %>" data-game-question-id="<%= @game.current_game_question.id %>" data-game-player-id="<%= @game_player.id %>" data-action="click->answer#submit">Answer</button>        
-                  </form>
-                </li>
-                 
-              </ul>
-            <% end %>
-          </div>
+        <div>
+          <% if @game_current_answer %>
+            <h2 class="text-success">Your Answer Has Been Submitted. Good Luck! The Quizmaster will reveal the answer soon.</h2>
+          <% else %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h2>Question</h2>
+                <p class="text-primary"><%= @game.current_game_question.question.question %></p>
+              </li>
+              <li class="list-group-item">
+                <%= form_with url: episodes_player_board_episode_path(@game), method: :patch, class: "form-inline" do |form| %>
+                  <%= form.hidden_field :game_player_id, value: @game_player.id %>
+                  <%= form.hidden_field :game_question_id, value: @game.current_game_question_id %>
+                  <%= form.number_field :answer, class: "form-control form-control-lg", required: true %>
+                  <button class="btn btn-primary btn-lg" type="submit">Answer</button>        
+                <% end %>
+              </li>
+                
+            </ul>
+          <% end %>
         </div>
       <% end %>
       <% if @game.game_state == GameState::QUESTION_ANSWER || @game.game_state == GameState::QUESTION_BONUS || @game.game_state == GameState::QUESTION_TABLE  %>

@@ -8,5 +8,6 @@ class GameState < ApplicationRecord
   QUESTION_ANSWER = 2
   QUESTION_BONUS = 3
   QUESTION_TABLE = 4
-  FINISHED = 5
+  QUESTION_LEADERBOARD = 5
+  FINISHED = 100
 end

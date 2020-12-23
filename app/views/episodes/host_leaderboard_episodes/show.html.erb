@@ -1,0 +1,30 @@
+<%= render 'shared/play_header', game: @game %>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card shadow p-2">
+      <div class="card-body">
+        <h1 style="text-align:center;background-color:#f1f1f1;">Leaderboard</h1>
+        <table class="table">
+          <tr>
+            <th>#</th>
+            <th>Team Name</th>
+            <th>Total Points</th>
+          </tr>
+          <% @game_players.each_with_index do |gp, i| %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <th><%= gp.user.team_name %></th>
+              <td class="text-primary"><%= gp.total_points %></td>
+            </tr>
+          <% end %>
+        </table>
+        <br>
+        <% if @game.number_of_questions == @game.question_number %>
+          <%= link_to "Finish Quiz", episodes_finished_episode_path(@game.id), class: "btn btn-success"%>
+        <% else %>
+          <%= link_to "Play Next Question", episodes_host_question_episode_path(@game.id), class: "btn btn-success"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
