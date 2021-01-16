@@ -13,7 +13,7 @@ class Episodes::HostQuestionEpisodesController < ApplicationController
     game = Game.find_by(id: params[:id])
     return if game.game_state == GameState::QUESTION_PLAY
 
-    question = Question.where.not(id: GameQuestion.pluck(:question_id)).sample
+    question = Question.where(is_public: true).or(Question.where(user: current_user)).where.not(id: GameQuestion.pluck(:question_id)).sample
     game_question = GameQuestion.create(game: game, question: question)
     game.update(game_state: GameState::QUESTION_PLAY, current_game_question: game_question, question_number: game.question_number + 1)
   end

@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.where(user: current_user)
   end
 
   # GET /games/1
@@ -30,7 +30,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = Game.new(number_of_questions: 30)
+    @game = Game.new(number_of_questions: 30, use_public_questions: true)
   end
 
   # GET /games/1/edit
@@ -98,6 +98,6 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:name, :user_id, :is_complete, :pin, :number_of_questions, :question_number)
+    params.require(:game).permit(:name, :user_id, :is_complete, :pin, :number_of_questions, :question_number, :use_public_questions)
   end
 end

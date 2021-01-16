@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.where(user: current_user)
   end
 
   # GET /questions/1
@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
+    redirect_to question_path(@question) unless @question.user == current_user
   end
 
   # POST /questions

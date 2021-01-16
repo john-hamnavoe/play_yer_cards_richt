@@ -7,9 +7,17 @@
     <div class="card card mb-4">
       <div class="card-body">
         <h5 class="card-title"><%= link_to question.question, question %></h5>
-        <p class="card-text"><%= question.created_at %></p>
+        <p class="small">Question added by: <%= question.user.team_name %></p>
+        <% if question.is_public %>
+          <b>Public</b>
+        <% end %>
       </div>
+      <% if question.user == current_user %>
+        <div class="card-footer">
+          <%= link_to "Edit", edit_question_path(question) %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>
-  <%= render "partials/import_objects", path: import_questions_path %>
+<%= render "partials/import_objects", path: import_questions_path %>

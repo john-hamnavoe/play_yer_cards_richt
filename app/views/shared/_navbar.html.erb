@@ -5,14 +5,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
-     <% if current_user && current_user.is_admin %>
       <ul class="navbar-nav">
         <%= link_to "Questions", questions_path, class: "nav-link" %>
       </ul>
       <ul class="navbar-nav">
         <%= link_to "Games", games_path, class: "nav-link" %>
       </ul>      
-    <% end %>
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <%= link_to "Change User Details", edit_user_registration_path, method: :get, class: "nav-link" %>

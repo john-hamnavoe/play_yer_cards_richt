@@ -15,7 +15,11 @@
         <%= form.label :number_of_questions, class: "font-weight-bold" %>
         <%= form.number_field :number_of_questions, placeholder: "Enter number of questions", class: "form-control" %>        
       </div>
-    </li>
+      <div class="form-group">
+        <%= form.label :use_public_questions, class: "font-weight-bold" %>
+        <%= form.check_box :use_public_questions, placeholder: "Enter use_public_questions", class: "pull-left" %>
+      </div>      
+    </li>   
   </ul>
   <div class="card-footer">
     <%= link_to "Cancel", game, class: 'btn btn-outline-secondary float-left' if game.persisted? %>
