@@ -67,8 +67,8 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  # host = 'cryptic-inlet-57639.herokuapp.com'
-  # config.action_mailer.default_url_options = { host: host }
+  host = 'cryptic-inlet-57639.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => ENV['SENDGRID_API_KEY'],
