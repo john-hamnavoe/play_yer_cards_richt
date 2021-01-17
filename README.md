@@ -5,7 +5,7 @@
 Slight variant of a quiz, where after each question the person with best answer gets to play 
 a bonus round by guessing higher or lower on set of 6 cards to win extra points. 
 
-You can play it [here](https://github.com/john-hamnavoe/play_yer_cards_richt).
+You can play it [here](https://cryptic-inlet-57639.herokuapp.com/).
 Create an account and the home page explains the rules. 
 Login and create games other players will need to create an account and enter the pin to play. 
 (If you use the option use_public_questions in your game you can use other questions people have uploaded and made public.)
