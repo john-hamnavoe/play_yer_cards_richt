@@ -67,15 +67,16 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'cryptic-inlet-57639.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+  # host = 'cryptic-inlet-57639.herokuapp.com'
+  # config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
-    :port           => ENV['MAILGUN_SMTP_PORT'],
-    :address        => ENV['MAILGUN_SMTP_SERVER'],
-    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'cryptic-inlet-57639.herokuapp.com',
+    :user_name => 'apikey',
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => 'cryptic-inlet-57639.herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
     :authentication => :plain,
+    :enable_starttls_auto => true
   }
   config.action_mailer.perform_caching = false
 
