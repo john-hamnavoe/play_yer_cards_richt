@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Game
 
-Things you may want to cover:
+Slight variant of a quiz, where after each question the person with best answer gets to play 
+a bonus round by guessing higher or lower on set of 6 cards to win extra points. 
 
-* Ruby version
+You can play it [here](https://github.com/john-hamnavoe/play_yer_cards_richt).
+Create an account and the home page explains the rules. 
+Login and create games other players will need to create an account and enter the pin to play. 
+(If you use the option use_public_questions in your game you can use other questions people have uploaded and made public.)
 
-* System dependencies
+ALL QUESTION ANSWERS ARE NUMBERS. 
 
-* Configuration
+Game host controls the bonus round etc. 
 
-* Database creation
+If you want to import questions create a spreadsheet with two or three columns. 
+You need 'question' and 'answer' as first to columns, 'is_public' is optional third column (default is true).
+Use those exact headers in first row of the spreadsheet.
 
-* Database initialization
+# Tech
 
-* How to run the test suite
+* Ruby 2.7.0
 
-* Services (job queues, cache servers, search engines, etc.)
+* Rails 6.0
 
-* Deployment instructions
+* Update the mailer configuration if you want to clone and use.
 
-* ...
+* rails db:create
+
+* rails db:migrate
+
+* rails s
+
+* Small number of tests. minitest. rails test.
+
+* As you can see on the link you can deploy on heroku. Need to use redis-to-go or equivalent.
+
+* Cards CSS can be found [here](https://github.com/selfthinker/CSS-Playing-Cards)
