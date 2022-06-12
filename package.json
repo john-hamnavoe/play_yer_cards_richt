@@ -1,6 +1,9 @@
 {
   "name": "play_yer_cards_richt",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@rails/actioncable": "^6.0.0",
